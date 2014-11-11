@@ -1,0 +1,4 @@
+GMscripts
+=========
+
+Scripts para GreaseMonkey
