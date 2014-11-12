@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        tarea2
-// @namespace   cursoJS
+// @namespace   oneman.rt@gmail.com
 // @description Tarea 2
 // @include		http://www.marca.com/*
 // @include     http://www.ideal.es/*
@@ -10,19 +10,34 @@
 // @grant       none
 // ==/UserScript==
 
+function popUp() { alert('hi'); }
+function toggleSchema() {
+	$('#myDivGM').fadeToggle();
+	
+}
+
+
 if (window.jQuery) {
 	console.log('jQuery cargado con éxito.');
 	var metaURL = $('meta[property="og:url"]').attr('content');
 	if (metaURL === "http://www.ideal.es/") {
     	console.log('Estoy en IDEAL');
+    	var body = $('<div id="myDivGM"><table id="myTableGM"><tr><td>.</td></tr></table></div>');
+    	var r = $('<input id="myButtonGM" type="button" value="ACTIVAR/DESACTIVAR EL SCRIPT DE GREASEMONKEY"/>').click(toggleSchema);
+        $('div[class="nav-topic"]').after(r);
+    	
+    	$('#myButtonGM').after(body);
    		var h3 = document.getElementsByTagName('h3');
 		console.log(h3.length);
     }
-   	else if (metaURL === "http://www.marca.com/" || metaURL === "http://www.elmundo.es/") {
-    	console.log('Estoy en MARCA o ELMUNDO');
-        var r = $('<input id="myButtonGM" type="button" value="ACTIVAR/DESACTIVAR EL SCRIPT DE GREASEMONKEY"/>');
-        $("#contenido").before(r);
-        r.click(function () { alert('hi'); });
+   	else if (metaURL === "http://www.marca.com/") {
+    	console.log('Estoy en MARCA ');
+        //~ var r = $('<input id="myButtonGM" type="button" value="ACTIVAR/DESACTIVAR EL SCRIPT DE GREASEMONKEY"/>').click(popUp);
+        var body = $('<div id="myDivGM"><table id="myTableGM"><tr><td>.</td></tr></table></div>');
+        var r = $('<input id="myButtonGM" type="button" value="ACTIVAR/DESACTIVAR EL SCRIPT DE GREASEMONKEY"/>').click(toggleSchema);
+        $("#barra-superior").before(r);
+        $('#myButtonGM').after(body);
+        //~ r.click(popUp);
 
     	//$("#myButton").before($('#contenido'));
     	//$("#myButton").click(function (){
@@ -34,6 +49,32 @@ if (window.jQuery) {
    		var h2 = document.getElementsByTagName('h2');
 		console.log(h2.length);
     }
+    else if (metaURL === "http://www.elmundo.es/") {
+		console.log('Estoy en MUNDO ');
+		var body = $('<div id="myDivGM"><table id="myTableGM"><tr><td>.</td></tr></table></div>');
+        var r = $('<input id="myButtonGM" type="button" value="ACTIVAR/DESACTIVAR EL SCRIPT DE GREASEMONKEY"/>').click(toggleSchema);
+        $("#contenido").before(r);
+        $('div[class="col col-12"]').before(body);
+        //~ $("#barra-superior").after(r);
+        //~ r.click(popUp);
+
+    	//$("#myButton").before($('#contenido'));
+    	//$("#myButton").click(function (){
+    	//   var test = $('<button/>',{
+    	//       text: 'Test', click: function () { alert('hi'); }
+    	//       }).wrap('<tr><td></td></tr>').closest('tr');
+    	//   $("#addNodeTable tr:last").before(test);
+    	//});
+   		var h2 = document.getElementsByTagName('h2');
+		console.log(h2.length);
+		for (var i = 0; i<h2.length; i++) {
+			var a_node = h2[i].getElementsByTagName('a');
+			var txt = a_node[0].getAttribute('title');
+			var href = a_node[0].getAttribute('href');
+			var input = '<tr>'+txt+'</tr><tr>'+href+'</tr>';
+			$('#myTableGM tr:last').append(input);
+		}
+	}
 
 	console.log('Inicio del resumen de noticias');
 }

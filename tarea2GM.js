@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        tarea2
-// @namespace   cursoJS
-// @description Tarea 2
-// @version     1
-// @grant       none
+// @name		tarea2
+// @namespace	cursoJS
+// @description	Tarea 2
+// @version		1
+// @grant		none
 // ==/UserScript==
 
 console.log('Inicio del resumen de noticias');
@@ -15,11 +15,11 @@ var pairs = [];
 var a_nodes = [];
 console.log("Hay "+h2.length+" noticias");
 for (var i=0; i<h2.length; i++) {
-    var a_node = h2[i].getElementsByTagName('a');
-    titles.push(a_node[0].getAttribute('title'));
-    hrefs.push(a_node[0].getAttribute('href'));
-    pairs.push([a_node[0].getAttribute('title'),a_node[0].getAttribute('href')]);
-    console.log("Titulo = "+titles[i]+" Y enlace: "+hrefs[i]);
+	var a_node = h2[i].getElementsByTagName('a');
+	titles.push(a_node[0].getAttribute('title'));
+	hrefs.push(a_node[0].getAttribute('href'));
+	pairs.push([a_node[0].getAttribute('title'),a_node[0].getAttribute('href')]);
+	console.log("Titulo = "+titles[i]+" Y enlace: "+hrefs[i]);
 }
 
 
